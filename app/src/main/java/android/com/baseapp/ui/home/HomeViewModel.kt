@@ -1,13 +1,11 @@
 package android.com.baseapp.ui.home
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+import androidx.databinding.ObservableField
 import androidx.lifecycle.ViewModel
 
 class HomeViewModel : ViewModel() {
-
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is home Fragment"
+    val text2: ObservableField<String> = ObservableField<String>()
+    init {
+        text2.set("This is home Fragment using databinding")
     }
-    val text: LiveData<String> = _text
 }

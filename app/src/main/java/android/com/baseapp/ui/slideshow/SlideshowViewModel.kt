@@ -1,13 +1,12 @@
 package android.com.baseapp.ui.slideshow
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+import androidx.databinding.ObservableField
 import androidx.lifecycle.ViewModel
 
 class SlideshowViewModel : ViewModel() {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is slideshow Fragment"
+    val text2: ObservableField<String> = ObservableField<String>()
+    init {
+        text2.set("This is slideshow Fragment using databinding")
     }
-    val text: LiveData<String> = _text
 }
