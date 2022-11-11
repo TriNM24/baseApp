@@ -10,6 +10,7 @@ import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import dagger.hilt.android.AndroidEntryPoint
 import java.lang.reflect.ParameterizedType
 
 abstract class BaseFragment<BD : ViewDataBinding, VM : ViewModel> : Fragment() {

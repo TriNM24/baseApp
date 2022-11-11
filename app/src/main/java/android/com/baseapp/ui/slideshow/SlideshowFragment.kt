@@ -4,7 +4,9 @@ import android.com.baseapp.R
 import android.com.baseapp.databinding.FragmentSlideshowBinding
 import android.com.baseapp.ui.base.BaseFragment
 import android.view.View
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SlideshowFragment : BaseFragment<FragmentSlideshowBinding, SlideshowViewModel>() {
 
     override val resourceLayoutId: Int
