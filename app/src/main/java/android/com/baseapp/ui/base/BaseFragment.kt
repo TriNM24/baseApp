@@ -1,5 +1,7 @@
 package android.com.baseapp.ui.base
 
+import android.app.Dialog
+import android.com.baseapp.utils.Utils
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,12 +12,12 @@ import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import dagger.hilt.android.AndroidEntryPoint
 import java.lang.reflect.ParameterizedType
 
 abstract class BaseFragment<BD : ViewDataBinding, VM : ViewModel> : Fragment() {
     lateinit var viewModel: VM
     var binding: BD? = null
+    lateinit var mLoadingDialog: Dialog
 
     abstract val resourceLayoutId: Int
     abstract fun onInitView(root: View?)
@@ -35,6 +37,7 @@ abstract class BaseFragment<BD : ViewDataBinding, VM : ViewModel> : Fragment() {
     @CallSuper
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        mLoadingDialog = Utils.getLoading(requireContext())
         initViewModel()
         subscribeUi(viewModel)
     }
@@ -53,5 +56,6 @@ abstract class BaseFragment<BD : ViewDataBinding, VM : ViewModel> : Fragment() {
     /////////////////////////
     //Get the actual type of generic T
     @Suppress("UNCHECKED_CAST")
-    private val clazz: Class<VM> = (this.javaClass.genericSuperclass as ParameterizedType).actualTypeArguments[1] as Class<VM>
+    private val clazz: Class<VM> =
+        (this.javaClass.genericSuperclass as ParameterizedType).actualTypeArguments[1] as Class<VM>
 }

@@ -22,4 +22,9 @@
     <style name="Theme.BaseApp.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.BaseApp.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="WrapContentDialog" parent="Theme.AppCompat.Light.Dialog">
+        <item name="windowMinWidthMajor">0%</item>
+        <item name="windowMinWidthMinor">0%</item>
+    </style>
 </resources>
