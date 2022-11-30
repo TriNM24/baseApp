@@ -1,5 +1,7 @@
 package android.com.baseapp.ui.splash
 
+import android.com.baseapp.MainActivity
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -19,7 +21,9 @@ class SplashActivity : AppCompatActivity() {
                     Toast.makeText(baseContext,"Login",Toast.LENGTH_SHORT).show()
                 }
                 ResultSplash.MAIN -> {
-                    Toast.makeText(baseContext,"Main",Toast.LENGTH_SHORT).show()
+                    val intent = Intent(this, MainActivity::class.java)
+                    val bundle = Bundle()
+                    this.startActivity(intent, bundle)
                 }
             }
         }
