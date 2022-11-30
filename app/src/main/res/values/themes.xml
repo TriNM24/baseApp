@@ -12,6 +12,18 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <item name="android:windowAnimationStyle">@style/WindowAnimationStyle</item>
+    </style>
+
+    <!--prevent white background when startup app-->
+    <style name="SplashTheme" parent="Theme.BaseApp">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowBackground">@drawable/background_splash</item>
+        <item name="android:windowTranslucentNavigation">false</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">false</item>
     </style>
 
     <style name="Theme.BaseApp.NoActionBar">
@@ -27,4 +39,10 @@
         <item name="windowMinWidthMajor">0%</item>
         <item name="windowMinWidthMinor">0%</item>
     </style>
+
+    <style name="WindowAnimationStyle">
+        <item name="android:windowEnterAnimation">@android:anim/fade_in</item>
+        <item name="android:windowExitAnimation">@android:anim/fade_out</item>
+    </style>
+
 </resources>
