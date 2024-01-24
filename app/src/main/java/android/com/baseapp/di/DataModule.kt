@@ -1,5 +1,6 @@
 package android.com.baseapp.di
 
+import android.com.baseapp.R
 import android.com.baseapp.data.api.ApiService
 import android.com.baseapp.data.api.PrettyLogger
 import android.com.baseapp.utils.Constants
@@ -25,18 +26,18 @@ object DataModule {
 
     @Provides
     @Singleton
-    fun provideLoggingInterceptor(): HttpLoggingInterceptor{
+    fun provideLoggingInterceptor(): HttpLoggingInterceptor {
         val prettyLogInterceptor = HttpLoggingInterceptor(PrettyLogger())
         prettyLogInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
-        return  prettyLogInterceptor
+        return prettyLogInterceptor
     }
 
     @Provides
     @Singleton
-    fun provideOkHttpClient(@ApplicationContext context: Context,
-                            prettyLogInterceptor: HttpLoggingInterceptor
-    ): OkHttpClient{
-
+    fun provideOkHttpClient(
+        @ApplicationContext context: Context,
+        prettyLogInterceptor: HttpLoggingInterceptor
+    ): OkHttpClient {
         val builderOkHttpClient = OkHttpClient.Builder()
         //add interceptor for pretty log
         builderOkHttpClient.addInterceptor(prettyLogInterceptor)
@@ -54,8 +55,8 @@ object DataModule {
 
     @Provides
     @Singleton
-    fun provideRetrofit(client: OkHttpClient): Retrofit {
-        return Retrofit.Builder().baseUrl(Constants.baseUrl)
+    fun provideRetrofit(client: OkHttpClient, @ApplicationContext context: Context): Retrofit {
+        return Retrofit.Builder().baseUrl(context.getString(R.string.api_url))
             .addConverterFactory(GsonConverterFactory.create())
             .client(client)
             .build()
