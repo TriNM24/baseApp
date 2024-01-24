@@ -2,7 +2,7 @@ package android.com.baseapp.ui.home
 
 import android.com.baseapp.R
 import android.com.baseapp.adapter.MainMenuAdapter
-import android.com.baseapp.data.api.respone.Status
+import android.com.baseapp.data.api.respone.ApiResult
 import android.com.baseapp.databinding.FragmentHomeBinding
 import android.com.baseapp.ui.base.BaseFragment
 import android.view.View
@@ -28,19 +28,19 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
         binding?.viewModel = viewModel
 
         viewModel.mQuoteData.observe(this){ data ->
-            when(data.status){
-                Status.SUCCESS -> {
+            when(data){
+                is ApiResult.Success -> {
                     Toast.makeText(requireContext(),"Success",Toast.LENGTH_LONG).show()
-                    val datas = listOf<String>("1","2","3")
+                    val datas = listOf("1","2","3")
                     adapter.setData(datas)
                     adapter.notifyDataSetChanged()
                     mLoadingDialog.dismiss()
                 }
-                Status.ERROR -> {
+                is ApiResult.Error -> {
                     Toast.makeText(requireContext(),"Error: ${data.message}",Toast.LENGTH_LONG).show()
                     mLoadingDialog.dismiss()
                 }
-                Status.LOADING -> {
+                is ApiResult.Loading -> {
                     mLoadingDialog.show()
                 }
             }

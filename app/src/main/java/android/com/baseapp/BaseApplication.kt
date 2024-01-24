@@ -10,7 +10,7 @@ import timber.log.Timber.Forest.plant
 class BaseApplication : Application() {
     override fun onCreate() {
         super.onCreate()
-        if(BuildConfig.BUILD_TYPE == "debug"){
+        if(BuildConfig.BUILD_TYPE != "release"){
             plant(MyDebugTree())
         }
     }

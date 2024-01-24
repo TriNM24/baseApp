@@ -1,10 +1,8 @@
-package android.com.baseapp.data.api
+package android.com.baseapp.data.repository
 
 import android.com.baseapp.data.model.QuoteList
 import retrofit2.Response
-import retrofit2.http.GET
 
-interface ApiService {
-    @GET("/quotes")
+interface ApiRepository {
     suspend fun getQuotes() : Response<QuoteList>
 }

@@ -1,14 +1,13 @@
 package android.com.baseapp.data.repository
 
 import android.com.baseapp.data.api.ApiService
-import android.com.baseapp.data.api.respone.Resource
 import android.com.baseapp.data.model.QuoteList
 import retrofit2.Response
 import javax.inject.Inject
 
-class HomeRepository @Inject constructor (private val apiService: ApiService) {
+class ApiRespositoryImp @Inject constructor (private val apiService: ApiService) : ApiRepository {
 
-    suspend fun getQuotes(): Resource<QuoteList> {
+    override suspend fun getQuotes(): Response<QuoteList> {
         return apiService.getQuotes()
     }
 }
