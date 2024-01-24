@@ -10,4 +10,9 @@
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
+
+    <string name="dialog_confirm_button">Confirm</string>
+    <string name="dialog_positive_button">Yes</string>
+    <string name="dialog_negative_button">No</string>
+
 </resources>

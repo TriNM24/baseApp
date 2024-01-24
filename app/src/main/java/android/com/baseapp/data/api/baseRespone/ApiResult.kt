@@ -1,4 +1,4 @@
-package android.com.baseapp.data.api.respone
+package android.com.baseapp.data.api.baseRespone
 
 sealed class ApiResult<T>(
     val data: T? = null,

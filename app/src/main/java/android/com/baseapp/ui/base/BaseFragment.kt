@@ -1,7 +1,7 @@
 package android.com.baseapp.ui.base
 
 import android.app.Dialog
-import android.com.baseapp.utils.Utils
+import android.com.baseapp.utils.DialogUtils
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -37,7 +37,7 @@ abstract class BaseFragment<BD : ViewDataBinding, VM : ViewModel> : Fragment() {
     @CallSuper
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mLoadingDialog = Utils.getLoading(requireContext())
+        mLoadingDialog = DialogUtils.getLoading(requireContext())
         initViewModel()
         subscribeUi(viewModel)
     }

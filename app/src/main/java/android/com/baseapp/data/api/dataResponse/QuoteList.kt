@@ -1,4 +1,4 @@
-package android.com.baseapp.data.model
+package android.com.baseapp.data.api.dataResponse
 
 data class QuoteList(
     val count: Int = 0,

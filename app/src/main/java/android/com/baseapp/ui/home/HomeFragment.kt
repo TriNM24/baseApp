@@ -2,7 +2,7 @@ package android.com.baseapp.ui.home
 
 import android.com.baseapp.R
 import android.com.baseapp.adapter.MainMenuAdapter
-import android.com.baseapp.data.api.respone.ApiResult
+import android.com.baseapp.data.api.baseRespone.ApiResult
 import android.com.baseapp.databinding.FragmentHomeBinding
 import android.com.baseapp.ui.base.BaseFragment
 import android.view.View

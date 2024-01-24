@@ -1,7 +1,7 @@
 package android.com.baseapp.ui.home
 
-import android.com.baseapp.data.api.respone.ApiResult
-import android.com.baseapp.data.model.QuoteList
+import android.com.baseapp.data.api.baseRespone.ApiResult
+import android.com.baseapp.data.api.dataResponse.QuoteList
 import android.com.baseapp.data.repository.ApiRepository
 import android.com.baseapp.utils.SingleLiveEvent
 import androidx.databinding.ObservableField
