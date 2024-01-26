@@ -20,8 +20,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), MainActions {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
 
-    override val resourceLayoutId: Int
-        get() = R.layout.activity_main
+    override val resourceLayoutId = R.layout.activity_main
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

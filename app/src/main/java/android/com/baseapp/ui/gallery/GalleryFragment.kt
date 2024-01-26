@@ -8,10 +8,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class GalleryFragment : BaseFragment<FragmentGalleryBinding, GalleryViewModel>() {
-
-    override val resourceLayoutId: Int
-        get() = R.layout.fragment_gallery
-
+    override val resourceLayoutId = R.layout.fragment_gallery
     override fun onInitView(root: View?) {
 
     }

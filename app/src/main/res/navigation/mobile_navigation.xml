@@ -9,7 +9,11 @@
         android:id="@+id/nav_home"
         android:name="android.com.baseapp.ui.home.HomeFragment"
         android:label="@string/menu_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_nav_home_to_expendable_navigation"
+            app:destination="@id/expendable_navigation" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_gallery"
@@ -22,4 +26,7 @@
         android:name="android.com.baseapp.ui.slideshow.SlideshowFragment"
         android:label="@string/menu_slideshow"
         tools:layout="@layout/fragment_slideshow" />
+
+    <include app:graph="@navigation/expendable_navigation" />
+
 </navigation>

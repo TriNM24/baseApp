@@ -9,8 +9,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class SlideshowFragment : BaseFragment<FragmentSlideshowBinding, SlideshowViewModel>() {
 
-    override val resourceLayoutId: Int
-        get() = R.layout.fragment_slideshow
+    override val resourceLayoutId = R.layout.fragment_slideshow
 
     override fun onInitView(root: View?) {
 
