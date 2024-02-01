@@ -2,6 +2,7 @@
 <layout>
 
     <data>
+
         <variable
             name="viewModel"
             type="android.com.baseapp.ui.expendableList.ExpendableListViewModel" />
@@ -14,15 +15,14 @@
         android:layout_height="match_parent"
         tools:context=".ui.home.HomeFragment">
 
-        <androidx.recyclerview.widget.RecyclerView
+        <ExpandableListView
             android:id="@+id/list_menu"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:divider="@android:color/darker_gray"
+            android:dividerHeight="0.5dp"
+            android:groupIndicator="@null"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:orientation="vertical"
-            tools:listitem="@layout/item_main_menu"
-            tools:itemCount="3"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
