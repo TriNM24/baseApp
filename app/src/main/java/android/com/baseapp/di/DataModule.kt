@@ -3,7 +3,6 @@ package android.com.baseapp.di
 import android.com.baseapp.R
 import android.com.baseapp.data.api.ApiService
 import android.com.baseapp.data.api.PrettyLogger
-import android.com.baseapp.utils.Constants
 import android.com.baseapp.utils.Constants.API_KEY
 import android.com.baseapp.utils.Constants.API_KEY_VALUE
 import android.content.Context

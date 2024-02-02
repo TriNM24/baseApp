@@ -16,6 +16,6 @@ class SlideshowFragment : BaseFragment<FragmentSlideshowBinding, SlideshowViewMo
     }
 
     override fun subscribeUi(viewModel: SlideshowViewModel) {
-        binding?.viewModel = viewModel
+        binding.viewModel = viewModel
     }
 }

@@ -1,10 +1,9 @@
-package android.com.baseapp.ui.expendableList
+package android.com.baseapp.adapter
 
 import android.annotation.SuppressLint
 import android.com.baseapp.R
 import android.com.baseapp.databinding.ListGroupBinding
 import android.content.Context
-import android.graphics.Typeface
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup

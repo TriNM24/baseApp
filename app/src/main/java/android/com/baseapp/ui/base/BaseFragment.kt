@@ -13,15 +13,21 @@ import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelStoreOwner
 import java.lang.reflect.ParameterizedType
 
 abstract class BaseFragment<BD : ViewDataBinding, VM : ViewModel> : Fragment() {
     lateinit var viewModel: VM
-    var binding: BD? = null
+    private var _binding: BD? = null
+    val binding get() = _binding!!
     lateinit var mLoadingDialog: Dialog
 
     @get:LayoutRes
     abstract val resourceLayoutId: Int
+
+    open val owner: ViewModelStoreOwner = this
+        //get() = this
+
     abstract fun onInitView(root: View?)
     protected abstract fun subscribeUi(viewModel: VM)
 
@@ -30,10 +36,9 @@ abstract class BaseFragment<BD : ViewDataBinding, VM : ViewModel> : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val root: View = inflater.inflate(resourceLayoutId, container, false)
-        binding = DataBindingUtil.bind(root)
-        onInitView(root)
-        return root
+        _binding = DataBindingUtil.inflate(inflater, resourceLayoutId, container, false)
+        onInitView(binding.root)
+        return binding.root
     }
 
     @CallSuper
@@ -45,12 +50,12 @@ abstract class BaseFragment<BD : ViewDataBinding, VM : ViewModel> : Fragment() {
     }
 
     private fun initViewModel() {
-        viewModel = ViewModelProvider(this)[clazz]
+        viewModel = ViewModelProvider(owner)[clazz]
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        binding = null
+        _binding = null
     }
 
     /////////////////////

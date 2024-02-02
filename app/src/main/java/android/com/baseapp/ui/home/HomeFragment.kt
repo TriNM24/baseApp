@@ -25,23 +25,25 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
                 "Expendable header list" -> {
                     findNavController().navigate(R.id.action_nav_home_to_expendable_navigation, bundleOf("title" to "Dynamic title"))
                 }
-
+                "Google map" -> {
+                    findNavController().navigate(R.id.action_nav_home_to_mapFragment, bundleOf("title" to "Dynamic title map"))
+                }
                 else -> {
                     Toast.makeText(requireActivity(), it, Toast.LENGTH_LONG).show()
                 }
             }
         }
-        binding?.listMenu?.adapter = adapter
+        binding.listMenu.adapter = adapter
     }
 
     override fun subscribeUi(viewModel: HomeViewModel) {
-        binding?.viewModel = viewModel
+        binding.viewModel = viewModel
 
         viewModel.mQuoteData.observe(this) { data ->
             when (data) {
                 is ApiResult.Success -> {
                     Toast.makeText(requireContext(), "Success", Toast.LENGTH_LONG).show()
-                    val datas = listOf("Expendable header list", "2", "3")
+                    val datas = listOf("Expendable header list", "Google map", "3")
                     adapter.setData(datas)
                     adapter.notifyDataSetChanged()
                     mLoadingDialog.dismiss()

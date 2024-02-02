@@ -1,9 +1,10 @@
 package android.com.baseapp.ui.expendableList
 
 import android.com.baseapp.R
+import android.com.baseapp.adapter.CustomizedExpandableListAdapter
 import android.com.baseapp.databinding.FragmentListBinding
 import android.com.baseapp.ui.base.BaseFragment
-import android.com.baseapp.ui.expendableList.ExpandableListDataItems.getData
+import android.com.baseapp.adapter.itemObject.ExpandableListDataItems.getData
 import android.view.View
 import android.widget.ExpandableListAdapter
 import android.widget.Toast
@@ -27,23 +28,23 @@ class ExpendableListFragment : BaseFragment<FragmentListBinding, ExpendableListV
             expandableDetailList
         )
 
-        binding?.listMenu?.setAdapter(expandableListAdapter)
+        binding.listMenu.setAdapter(expandableListAdapter)
 
-        binding?.listMenu?.setOnGroupExpandListener { groupPosition ->
+        binding.listMenu.setOnGroupExpandListener { groupPosition ->
             Toast.makeText(
                 requireContext(),
                 "${expandableTitleList[groupPosition]} List Expanded.",
                 Toast.LENGTH_SHORT
             ).show()
         }
-        binding?.listMenu?.setOnGroupCollapseListener { groupPosition ->
+        binding.listMenu.setOnGroupCollapseListener { groupPosition ->
             Toast.makeText(
                 requireContext(),
                 "${expandableTitleList[groupPosition]} List Collapsed.",
                 Toast.LENGTH_SHORT
             ).show()
         }
-        binding?.listMenu?.setOnChildClickListener { parent, v, groupPosition, childPosition, id ->
+        binding.listMenu.setOnChildClickListener { _, _, groupPosition, childPosition, _ ->
             Toast.makeText(
                 requireContext(), expandableTitleList[groupPosition]
                         + " -> "
@@ -54,10 +55,10 @@ class ExpendableListFragment : BaseFragment<FragmentListBinding, ExpendableListV
             false
         }
         //expand group one for default
-        binding?.listMenu?.expandGroup(0)
+        binding.listMenu.expandGroup(0)
     }
 
     override fun subscribeUi(viewModel: ExpendableListViewModel) {
-        binding?.viewModel = viewModel
+        binding.viewModel = viewModel
     }
 }

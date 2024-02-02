@@ -14,6 +14,6 @@ class GalleryFragment : BaseFragment<FragmentGalleryBinding, GalleryViewModel>()
     }
 
     override fun subscribeUi(viewModel: GalleryViewModel) {
-        binding?.viewModel = viewModel
+        binding.viewModel = viewModel
     }
 }
