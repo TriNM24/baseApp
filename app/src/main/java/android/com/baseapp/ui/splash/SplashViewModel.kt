@@ -19,7 +19,6 @@ class SplashViewModel @Inject constructor() : ViewModel() {
     }
 
     fun processChecking(){
-        Timber.d("testt")
         viewModelScope.launch {
             delay(1000)
             resultChecking.postValue(ResultSplash.MAIN)

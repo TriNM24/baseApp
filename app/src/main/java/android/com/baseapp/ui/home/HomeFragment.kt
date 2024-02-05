@@ -28,6 +28,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
                 "Google map" -> {
                     findNavController().navigate(R.id.action_nav_home_to_mapFragment, bundleOf("title" to "Dynamic title map"))
                 }
+                "Draw text in image" -> {
+                    findNavController().navigate(R.id.action_nav_home_to_drawTextFragment, bundleOf("title" to "Dynamic title draw text"))
+                }
                 else -> {
                     Toast.makeText(requireActivity(), it, Toast.LENGTH_LONG).show()
                 }
@@ -43,7 +46,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
             when (data) {
                 is ApiResult.Success -> {
                     Toast.makeText(requireContext(), "Success", Toast.LENGTH_LONG).show()
-                    val datas = listOf("Expendable header list", "Google map", "3")
+                    val datas = listOf("Expendable header list", "Google map", "Draw text in image")
                     adapter.setData(datas)
                     adapter.notifyDataSetChanged()
                     mLoadingDialog.dismiss()

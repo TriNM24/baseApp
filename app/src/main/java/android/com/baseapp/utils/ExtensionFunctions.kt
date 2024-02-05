@@ -3,6 +3,7 @@ package android.com.baseapp.utils
 import android.app.Activity
 import android.content.Context
 import android.content.pm.PackageManager
+import android.content.res.Resources.getSystem
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
@@ -36,3 +37,5 @@ fun Context.hasPermission(permissions: Array<String>): Boolean {
     }
     return true
 }
+
+val Int.px: Float get() = this * getSystem().displayMetrics.density

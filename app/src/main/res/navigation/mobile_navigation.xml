@@ -9,13 +9,16 @@
         android:id="@+id/nav_home"
         android:name="android.com.baseapp.ui.home.HomeFragment"
         android:label="@string/menu_home"
-        tools:layout="@layout/fragment_home" >
+        tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_nav_home_to_expendable_navigation"
             app:destination="@id/expendable_navigation" />
         <action
             android:id="@+id/action_nav_home_to_mapFragment"
             app:destination="@id/mapFragment" />
+        <action
+            android:id="@+id/action_nav_home_to_drawTextFragment"
+            app:destination="@id/drawTextFragment" />
     </fragment>
 
     <fragment
@@ -33,8 +36,13 @@
     <include app:graph="@navigation/expendable_navigation" />
     <fragment
         android:id="@+id/mapFragment"
-        tools:layout="@layout/fragment_map"
         android:name="android.com.baseapp.ui.map.MapFragment"
-        android:label="{title}" />
+        android:label="{title}"
+        tools:layout="@layout/fragment_map" />
+    <fragment
+        android:id="@+id/drawTextFragment"
+        android:name="android.com.baseapp.ui.drawText.DrawTextFragment"
+        android:label="{title}"
+        tools:layout="@layout/fragment_draw_text" />
 
 </navigation>

@@ -16,4 +16,8 @@
     <string name="dialog_negative_button">No</string>
     <string name="title_activity_maps">MapsActivity</string>
 
+    <string name="error_not_internet">Không có kết nối mạng</string>
+    <string name="connect_time_out">Yêu cầu hết thời gian chờ</string>
+    <string name="message_unknown_error">Hệ thống không xử lý được yêu cầu. Vui lòng thử lại sau!</string>
+
 </resources>
