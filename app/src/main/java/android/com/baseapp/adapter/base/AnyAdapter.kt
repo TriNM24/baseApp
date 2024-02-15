@@ -16,7 +16,7 @@ abstract class AnyAdapter<T> : RecyclerView.Adapter<AnyViewHolder<T>>() {
 
     abstract fun onCreateViewHolder(view: View): AnyViewHolder<T>
 
-    abstract fun onBindedViewHolder(holder: AnyViewHolder<T>, data: T)
+    abstract fun onBoundViewHolder(holder: AnyViewHolder<T>, data: T)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AnyViewHolder<T> = onCreateViewHolder(
         LayoutInflater.from(parent.context).inflate(getLayoutId(), parent, false)
@@ -27,7 +27,7 @@ abstract class AnyAdapter<T> : RecyclerView.Adapter<AnyViewHolder<T>>() {
     override fun onBindViewHolder(holder: AnyViewHolder<T>, position: Int) {
         items?.let {
             holder.bind(it[position])
-            onBindedViewHolder(holder, it[position])
+            onBoundViewHolder(holder, it[position])
         }
     }
 

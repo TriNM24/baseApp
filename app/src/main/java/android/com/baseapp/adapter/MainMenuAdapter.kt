@@ -16,7 +16,7 @@ class MainMenuAdapter(private val clickHandler: ((data: String) -> Unit)? = null
         return MainMenuViewHolder(ItemMainMenuBinding.bind(view))
     }
 
-    override fun onBindedViewHolder(holder: AnyViewHolder<String>, data: String) {
+    override fun onBoundViewHolder(holder: AnyViewHolder<String>, data: String) {
         when(holder){
             is MainMenuViewHolder -> holder.mBinding.btnItem.setOnClickListener{
                 clickHandler?.invoke(data)
