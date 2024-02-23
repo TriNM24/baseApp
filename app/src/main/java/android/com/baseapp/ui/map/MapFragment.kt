@@ -12,22 +12,28 @@ import android.location.LocationListener
 import android.location.LocationManager
 import android.os.Build
 import android.view.View
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.fragment.app.findFragment
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
-class MapFragment : BaseFragment<FragmentMapBinding, MapViewModel>(), OnMapReadyCallback {
+class MapFragment : BaseFragment<FragmentMapBinding, MapViewModel>(), OnMapReadyCallback,
+    GoogleMap.OnMyLocationButtonClickListener,
+    GoogleMap.OnMyLocationClickListener {
 
     override val resourceLayoutId = R.layout.fragment_map
 
     lateinit var mMap: GoogleMap
 
+    @SuppressLint("MissingPermission")
     val requestPermissionLauncher =
         registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
             // Handle permission results here
@@ -40,7 +46,19 @@ class MapFragment : BaseFragment<FragmentMapBinding, MapViewModel>(), OnMapReady
 
             }
             if (isAllGranted) {
-                getAndSetCurrentLocation()
+                with(mMap.uiSettings) {
+                    isZoomControlsEnabled = true
+                    isCompassEnabled = true
+                    isMyLocationButtonEnabled = true
+                    isIndoorLevelPickerEnabled = true
+                    isMapToolbarEnabled = true
+                    isZoomGesturesEnabled = true
+                    isScrollGesturesEnabled = true
+                    isTiltGesturesEnabled = true
+                    isRotateGesturesEnabled = true
+                }
+                mMap.isMyLocationEnabled = true
+                //getAndSetCurrentLocation()
             }
         }
 
@@ -67,20 +85,26 @@ class MapFragment : BaseFragment<FragmentMapBinding, MapViewModel>(), OnMapReady
     }
 
     override fun onInitView(root: View?) {
-        binding.mapView.onCreate(null)
-        binding.mapView.getMapAsync(this)
+        val mapFragment: SupportMapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
+        mapFragment.getMapAsync(this)
+
+        /*binding.mapView.onCreate(null)
+        binding.mapView.getMapAsync(this)*/
     }
 
     override fun subscribeUi(viewModel: MapViewModel) {
 
     }
 
+    @SuppressLint("MissingPermission")
     override fun onMapReady(map: GoogleMap) {
         mMap = map
 
         mMap.setOnMapLongClickListener { latlng ->
             mMap.addMarker(MarkerOptions().position(latlng).title("Marker"))
         }
+        mMap.setOnMyLocationButtonClickListener(this)
+        map.setOnMyLocationClickListener(this)
 
         val locationPermissions = arrayOf(
             Manifest.permission.ACCESS_FINE_LOCATION,
@@ -89,7 +113,28 @@ class MapFragment : BaseFragment<FragmentMapBinding, MapViewModel>(), OnMapReady
         if (!requireActivity().hasPermission(locationPermissions)) {
             requestPermissionLauncher.launch(locationPermissions)
         } else {
-            getAndSetCurrentLocation()
+            //getAndSetCurrentLocation()
+            with(map.uiSettings) {
+                isZoomControlsEnabled = true
+                isCompassEnabled = true
+                isMyLocationButtonEnabled = true
+                isIndoorLevelPickerEnabled = true
+                isMapToolbarEnabled = true
+                isZoomGesturesEnabled = true
+                isScrollGesturesEnabled = true
+                isTiltGesturesEnabled = true
+                isRotateGesturesEnabled = true
+            }
+            mMap.isMyLocationEnabled = true
         }
+    }
+
+    override fun onMyLocationButtonClick(): Boolean {
+        Toast.makeText(requireContext(), "MyLocation button clicked", Toast.LENGTH_SHORT).show()
+        return false
+    }
+
+    override fun onMyLocationClick(location: Location) {
+        Toast.makeText(requireContext(), "Current location:\n$location", Toast.LENGTH_LONG).show()
     }
 }
