@@ -50,7 +50,7 @@ object DataModule {
         //add interceptor for pretty log
         builderOkHttpClient.addInterceptor(prettyLogInterceptor)
         builderOkHttpClient.addInterceptor(ChuckerInterceptor(context))
-        builderOkHttpClient.networkInterceptors().add(Interceptor { chain ->
+        builderOkHttpClient.addInterceptor(Interceptor { chain ->
             val build = chain.request().newBuilder().addHeader(
                 API_KEY,
                 API_KEY_VALUE
