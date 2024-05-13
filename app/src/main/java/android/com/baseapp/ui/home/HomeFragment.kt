@@ -67,6 +67,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
 
     override fun onResume() {
         super.onResume()
-        viewModel.getApi()
+        val datas = listOf("Expendable header list", "Google map", "Draw text in image")
+        adapter.setData(datas)
+        adapter.notifyDataSetChanged()
+
+        //viewModel.getApi()
     }
 }

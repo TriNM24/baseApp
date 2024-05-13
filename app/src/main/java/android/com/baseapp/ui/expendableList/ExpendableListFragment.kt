@@ -6,6 +6,7 @@ import android.com.baseapp.databinding.FragmentListBinding
 import android.com.baseapp.ui.base.BaseFragment
 import android.com.baseapp.adapter.itemObject.ExpandableListDataItems.getData
 import android.view.View
+import android.widget.BaseExpandableListAdapter
 import android.widget.ExpandableListAdapter
 import android.widget.Toast
 import dagger.hilt.android.AndroidEntryPoint
@@ -16,7 +17,7 @@ class ExpendableListFragment : BaseFragment<FragmentListBinding, ExpendableListV
 
     override val resourceLayoutId = R.layout.fragment_list
 
-    var expandableListAdapter: ExpandableListAdapter? = null
+    var expandableListAdapter: BaseExpandableListAdapter? = null
     lateinit var expandableTitleList: List<String>
     lateinit var expandableDetailList: HashMap<String, List<String>>
 
@@ -27,6 +28,9 @@ class ExpendableListFragment : BaseFragment<FragmentListBinding, ExpendableListV
             requireContext(), expandableTitleList,
             expandableDetailList
         )
+
+        //testt
+        expandableListAdapter?.notifyDataSetChanged()
 
         binding.listMenu.setAdapter(expandableListAdapter)
 

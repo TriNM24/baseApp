@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseExpandableListAdapter
+import android.widget.ExpandableListView
 import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 
@@ -27,11 +28,11 @@ class CustomizedExpandableListAdapter(
         return expandableDetailList[this.expandableTitleList[groupPosition]]?.size?:0
     }
 
-    override fun getGroup(groupPosition: Int): Any {
+    override fun getGroup(groupPosition: Int): String {
         return expandableTitleList[groupPosition]
     }
 
-    override fun getChild(groupPosition: Int, childPosition: Int): Any {
+    override fun getChild(groupPosition: Int, childPosition: Int): String {
         return this.expandableDetailList[this.expandableTitleList[groupPosition]]?.get(childPosition)?:""
     }
 
@@ -65,6 +66,11 @@ class CustomizedExpandableListAdapter(
         val binding = DataBindingUtil.getBinding<ListGroupBinding>(mConvertView)
         binding?.title = listTitle
         binding?.groupArrow?.isActivated = isExpanded
+
+        //all way show expand group
+        /*val eLV = parent as ExpandableListView
+        eLV.expandGroup(groupPosition)*/
+
         return mConvertView
     }
 
@@ -84,6 +90,7 @@ class CustomizedExpandableListAdapter(
         }
         val expandedListTextView = mConvertView?.findViewById(R.id.expandedListItem) as TextView
         expandedListTextView.text = expandedListText
+
         return mConvertView
     }
 

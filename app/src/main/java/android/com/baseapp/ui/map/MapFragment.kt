@@ -7,14 +7,16 @@ import android.com.baseapp.databinding.FragmentMapBinding
 import android.com.baseapp.ui.base.BaseFragment
 import android.com.baseapp.utils.hasPermission
 import android.content.Context
+import android.location.Geocoder
 import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
 import android.os.Build
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.fragment.app.findFragment
+import androidx.annotation.RequiresApi
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -22,6 +24,7 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.Locale
 
 
 @AndroidEntryPoint
@@ -58,7 +61,7 @@ class MapFragment : BaseFragment<FragmentMapBinding, MapViewModel>(), OnMapReady
                     isRotateGesturesEnabled = true
                 }
                 mMap.isMyLocationEnabled = true
-                //getAndSetCurrentLocation()
+                getAndSetCurrentLocation()
             }
         }
 
@@ -78,6 +81,24 @@ class MapFragment : BaseFragment<FragmentMapBinding, MapViewModel>(), OnMapReady
             mMap.animateCamera(CameraUpdateFactory.zoomTo(15f))
 
             locationManager.removeUpdates(localtionListener)
+
+            //testt
+            val geocoder = Geocoder(requireContext(), Locale.getDefault())
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                geocoder.getFromLocation(location.latitude, location.longitude, 10){
+                    it.forEach { address ->
+                        run {
+                            address.getAddressLine(0)
+                            Log.d("testt", "address:${address.toString()}")
+                        }
+                    }
+                }
+            }else{
+                val addresses = geocoder.getFromLocation(location.latitude, location.longitude, 10)
+                addresses?.forEach { address -> {
+                    Log.d("testt","address:${address.toString()}")
+                } }
+            }
         }
         val provider =
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) LocationManager.FUSED_PROVIDER else LocationManager.NETWORK_PROVIDER
@@ -88,8 +109,8 @@ class MapFragment : BaseFragment<FragmentMapBinding, MapViewModel>(), OnMapReady
         val mapFragment: SupportMapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
-        /*binding.mapView.onCreate(null)
-        binding.mapView.getMapAsync(this)*/
+        binding.mapView.onCreate(null)
+        binding.mapView.getMapAsync(this)
     }
 
     override fun subscribeUi(viewModel: MapViewModel) {
@@ -113,7 +134,7 @@ class MapFragment : BaseFragment<FragmentMapBinding, MapViewModel>(), OnMapReady
         if (!requireActivity().hasPermission(locationPermissions)) {
             requestPermissionLauncher.launch(locationPermissions)
         } else {
-            //getAndSetCurrentLocation()
+            getAndSetCurrentLocation()
             with(map.uiSettings) {
                 isZoomControlsEnabled = true
                 isCompassEnabled = true

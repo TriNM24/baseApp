@@ -2,8 +2,8 @@ package android.com.baseapp.adapter.itemObject
 
 
 object ExpandableListDataItems {
-    fun getData(): HashMap<String, List<String>> {
-        val expandableDetailList = HashMap<String, List<String>>()
+    fun getData(): LinkedHashMap<String, List<String>> {
+        val expandableDetailList = LinkedHashMap<String, List<String>>()
 
         // As we are populating List of fruits, vegetables and nuts, using them here
         // We can modify them as per our choice.
@@ -30,8 +30,26 @@ object ExpandableListDataItems {
         nuts.add("Cashews")
         nuts.add("Badam")
         nuts.add("Pista")
-        nuts.add("Raisin")
-        nuts.add("Walnut")
+        nuts.add("Raisin1")
+        nuts.add("Walnut2")
+        nuts.add("Walnut3")
+        nuts.add("Walnut4")
+        nuts.add("Walnut5")
+        nuts.add("Walnut6")
+        nuts.add("Walnut7")
+        nuts.add("Walnut8")
+        nuts.add("Walnut9")
+        nuts.add("Walnut10")
+        nuts.add("Walnut11")
+        nuts.add("Walnut12")
+        nuts.add("Walnut13")
+        nuts.add("Walnut14")
+        nuts.add("Walnut15")
+        nuts.add("Walnut16")
+        nuts.add("Walnut17")
+        nuts.add("Walnut18")
+        nuts.add("Walnut19")
+        nuts.add("Walnut20")
 
         // Fruits are grouped under Fruits Items. Similarly the rest two are under
         // Vegetable Items and Nuts Items respectively.
@@ -45,6 +63,16 @@ object ExpandableListDataItems {
         expandableDetailList["Fruits Items"] = fruits
         expandableDetailList["Vegetable Items"] = vegetables
         expandableDetailList["Nuts Items"] = nuts
+        expandableDetailList["Items 1"] = nuts
+        expandableDetailList["Items 2"] = nuts
+        expandableDetailList["Items 3"] = nuts
+        expandableDetailList["Items 4"] = nuts
+        expandableDetailList["Items 5"] = nuts
+        expandableDetailList["Items 6"] = nuts
+        expandableDetailList["Items 7"] = nuts
+        expandableDetailList["Items 8"] = nuts
+        expandableDetailList["Items 9"] = nuts
+        expandableDetailList["Items 10"] = nuts
 
         return expandableDetailList
     }
