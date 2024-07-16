@@ -1,0 +1,91 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+default_platform(:android)
+
+platform :android do
+  desc "Runs all the tests"
+  lane :test do
+    puts 'Hello World!'
+  end
+
+  lane :set_env_vars do
+  #        ENV["FIREBASE_APP_DEBUG"] = "1:945905622464:android:de2ac39d106abcffbf7c25"
+  #        ENV["FIREBASE_APP_STAGING"] = "1:945905622464:android:3d006cca5ed1ac74bf7c25"
+  #        ENV["FIREBASE_APP_PREPROD"] = "1:945905622464:android:43b11cb32b253f63bf7c25"
+  #        ENV["FIREBASE_APP_RELEASE"] = "1:945905622464:android:51ad127ee22fe673bf7c25"
+  #        ENV["TEAM_WEB_HOOK"] = "https://vibonline.webhook.office.com/webhookb2/d9b2dced-c658-421d-9cfb-eca3f621a610@662ce8bb-85db-4ba2-ba98-be222318b83e/IncomingWebhook/2887cada0062437793a167f9b1515b7f/0c58caac-d3a1-4657-8b56-5e7332a8c0e0"
+
+       ENV["TELEGRAM_BOT_TOKEN"] = "6874801128:AAE9y_djvcZhM_5T6UVdMZeRR8fNP9lN1Us"
+       ENV["TELEGRAM_GROUP_ID"] = "-4286703951"
+
+       #test
+       ENV["FIREBASE_APP_DEBUG"] = "1:468302125865:android:58a7ab6181ffffc6d9b538"
+       ENV["FIREBASE_APP_STAGING"] = "1:809200045569:android:e62a5f07a8045c5193ba00"
+       ENV["FIREBASE_APP_PREPROD"] = "1:809200045569:android:72899bebe47aa41f93ba00"
+       ENV["FIREBASE_APP_RELEASE"] = "1:809200045569:android:ff33c843489dda6993ba00"
+       ENV["TEAM_WEB_HOOK"] = "https://vibonline.webhook.office.com/webhookb2/7c825213-1f5e-49f7-8eb7-d45333729820@662ce8bb-85db-4ba2-ba98-be222318b83e/IncomingWebhook/f61bac11e27b4078a7b151ac691ec7b1/0c58caac-d3a1-4657-8b56-5e7332a8c0e0"
+  end
+
+  lane :incrementVersion do
+       path = '../app/build.gradle'
+       vc = /versionCode\s+(\d+)/
+       vn = /versionName\s+\"(\d+.\d+.\d+)\"/
+
+       # Reading build.gradle file to get versionName and versionCode
+       gradleFile = File.read(path)
+       versionCode = gradleFile[vc, 1].to_i
+       gradleFile[vc, 1] = (versionCode + 1).to_s
+
+       newGradleFile = File.new(path, 'w')
+       newGradleFile.write(gradleFile)
+       newGradleFile.close
+  end
+
+  lane :build_debug do
+        set_env_vars()
+        incrementVersion()
+        build_android_app(task: "assemble", build_type: "debug")
+        # build_android_app is a built-in fastlane action.
+        release = firebase_app_distribution(
+            app: ENV['FIREBASE_APP_DEBUG'],
+            groups_file: "./fastlane/config/tester_group_debug.txt",
+            release_notes_file: "./fastlane/note/note_debug.txt"
+        )
+        # send message to team channel
+#         text = IO.readlines("./note/note_debug.txt").join("\n")
+#         send_message(
+#           buildEnvironment: "Dev",
+#           environment: "Asset Sales Debug",
+#           note: text,
+#           iconUrl: "https://firebasestorage.googleapis.com/v0/b/vib-smart-collection.appspot.com/o/iOS%20Icon%2FDev120.png?alt=media&token=f9a4ac9e-6a5c-48b3-885e-405d639b99e5"
+#         )
+
+#         send message to telegram group
+            send_message_telegram(
+                buildEnvironment: "Debug",
+                environment: "BaseApp Debug",
+                note: "test note"
+            )
+    end
+    #have to run this function in external internet
+    lane :send_message_telegram do |options|
+        telegram(
+              token: ENV['TELEGRAM_BOT_TOKEN'],
+              chat_id: ENV['TELEGRAM_GROUP_ID'],
+              text: "Đã upload bản "+ options[:buildEnvironment] +" mới nhất lên App Tester nhờ mọi người check lại giúp\n" + options[:note]
+        )
+    end
+end
