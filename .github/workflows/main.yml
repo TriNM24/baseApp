@@ -21,15 +21,17 @@ jobs:
       java-version: 17
       distribution: "temurin"
  
+   - name: Decode Service Account Key JSON File
+     uses: timheuer/base64-to-file@v1
+     id: service_account_json_file
+     with:
+       fileName: "serviceAccount.json"
+       encodedString: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+
    - name: Run tests
-     run: bundle exec fastlane build_debug
- 
-   # - name: Decode Service Account Key JSON File
-   #   uses: timheuer/base64-to-file@v1
-   #   id: service_account_json_file
-   #   with:
-   #     fileName: "serviceAccount.json"
-   #     encodedString: ${{ secrets.GPLAY_SERVICE_ACCOUNT_KEY_JSON }}
+     run: bundle exec fastlane test
+     env:
+        FIREBASE_SERVICE_ACCOUNT: ${{ steps.service_account_json_file.outputs.filePath }}
  
    # - name: Decode Keystore File
    #   uses: timheuer/base64-to-file@v1
