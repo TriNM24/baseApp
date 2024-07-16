@@ -19,15 +19,15 @@ platform :android do
   desc "Runs all the tests"
   lane :test do
     set_env_vars()
-#     incrementVersion()
-#     build_android_app(task: "assemble", build_type: "debug")
-#     # build_android_app is a built-in fastlane action.
-#     release = firebase_app_distribution(
-#         app: ENV['FIREBASE_APP_DEBUG'],
-#         service_credentials_file: ENV['FIREBASE_SERVICE_ACCOUNT'],
-#         groups_file: "./fastlane/config/tester_group_debug.txt",
-#         release_notes_file: "./fastlane/note/note_debug.txt"
-#     )
+    incrementVersion()
+    build_android_app(task: "assemble", build_type: "debug")
+    # build_android_app is a built-in fastlane action.
+    release = firebase_app_distribution(
+        app: ENV['FIREBASE_APP_DEBUG'],
+        service_credentials_file: ENV['FIREBASE_SERVICE_ACCOUNT'],
+        groups_file: "./fastlane/config/tester_group_debug.txt",
+        release_notes_file: "./fastlane/note/note_debug.txt"
+    )
     send_message_telegram(
         buildEnvironment: "Debug",
         environment: "BaseApp Debug",
