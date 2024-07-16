@@ -34,7 +34,7 @@ jobs:
      run: bundle exec fastlane test
      env:
         FIREBASE_SERVICE_ACCOUNT: ${{ steps.service_account_json_file.outputs.filePath }}
-        MESSAGE_COMMIT: ${{ github.event.workflow_run.head_commit.message }}
+        MESSAGE_COMMIT: ${{ github.event.head_commit.message }}
  
    # - name: Decode Keystore File
    #   uses: timheuer/base64-to-file@v1
